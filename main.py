@@ -32,7 +32,6 @@ def write_to_db(info):
     db_connection = psycopg2.connect(host="localhost", port=5432, database="postgres", user="postgres", password="postgres")
     cursor = db_connection.cursor()
     cursor.execute("INSERT INTO user_logins (user_id, device_type, masked_ip, masked_device_id, locale, app_version, create_date) VALUES (%s, %s, %s, %s, %s, %s, %s)", info)
-    
     db_connection.commit()
     cursor.close()
     db_connection.close()
@@ -43,14 +42,20 @@ if __name__ == "__main__":
     response = sqs.receive_message(QueueUrl=QUEUE_URL, MaxNumberOfMessages=num_msgs)
     if list(response.keys())[0] == "Messages":
         for m in response['Messages']:
+            # Convert message into json object
             js = json.loads(m['Body'])
             if js == {'foo': 'oops_wrong_msg_type', 'bar': '123'}:
+                # Edge case where received an error message that message type was incorrect.
                 print("[ERROR]: Wrong message type found. Skipping entry...")
             else:
+                # Mask
                 masked_ip = mask(js['ip'])
                 masked_device_id = mask(js['device_id'])
+                # Turn app_version into int per table datatypes
                 app_version = int(js['app_version'].replace(".", ""))
+                # pass all info to final write method
                 info = [js['user_id'], js['device_type'], masked_ip, masked_device_id, js['locale'], app_version, datetime.now()]
                 write_to_db(info)
     else:
+        # Edge case where no message data was found.
         print(f"[ERROR]: No message found in data. Skipping response...")
