@@ -11,6 +11,18 @@ author: Luke Davidson - davidson.luked@gmail.com - (978) 201-2693
 5. Run the main python file using the command `python3 main.py`
     * Enter the number of messages to request, transform and push to the Postgres DB when prompted
 
+# Decisions made
+1. How will you read messages from the queue?
+    - I read messages through implementing an SQS client through the AWS boto3 library.
+2. What type of data structures should be used?
+    - I converted the raw message into a json object to be more easily worked with, and transformed the data corresponding to the table datatypes mentioned in the project description.
+3. How will you mask the PII data so that duplicate values can be identified?
+    - I used the popular python library `hashlib` to hash the PII data, more specifically the SHA256 algorithm to match the varchar(256) table datatype.
+4. What will be your strategy for connecting and writing to Postgres?
+    - I used the library `psycopg2` to secure a connection, write to the DB, and close the connection for each received message.
+5. Where and how will your application run?
+    - My application will run locally via a docker container created by the `docker-compose.yml` file.
+
 # Questions and Next Steps
 1. How would you deploy this application in production?
     - To deploy this pipeline in to production, I would integrate either regular or event driven sheduling, whichever is most suitable for it's use case, through cloud services such as AWS Data Pipeline or similar frameworks. When deployed, I would also integrate CI/CD pipelines to ensure the pipeline is continuously being tested and upgraded in its early stages. Finally I would write the pipeline in a more object oriented way to be more easily implemented with other processes.
