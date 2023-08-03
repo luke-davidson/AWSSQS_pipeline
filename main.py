@@ -31,7 +31,6 @@ def write_to_db(info):
     """
     db_connection = psycopg2.connect(host="localhost", port=5432, database="postgres", user="postgres", password="postgres")
     cursor = db_connection.cursor()
-    cursor.execute()
     cursor.execute("INSERT INTO user_logins (user_id, device_type, masked_ip, masked_device_id, locale, app_version, create_date) VALUES (%s, %s, %s, %s, %s, %s, %s)", info)
     
     db_connection.commit()
