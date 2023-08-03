@@ -11,21 +11,26 @@ author: Luke Davidson - davidson.luked@gmail.com - (978) 201-2693
 5. Run the main python file using the command `python3 main.py`
     * Enter the number of messages to request, transform and push to the Postgres DB when prompted
 
-# File descriptions
-[`main.py`](https://github.com/luke-davidson/FetchInterview/blob/main/main.py)
-- Main communication script with the web app. Receives input from the web app via the `month.html` file, passes in the input to the model, and passes the output back to the web app via the `output.html` file
-
 # Design considerations
 1. How will you read messages from the queue?
-    - A: 
+    - 
 2. What type of data structures should be used?
+    - 
 3. How will you mask the PII data so that duplicate values can be identified?
+    - 
 4. What will be your strategy for connecting and writing to Postgres?
+    - 
 5. Where and how will your application run?
+    - 
 
 # Questions
 1. How would you deploy this application in production?
+    - 
 2. What other components would you want to add to make this production ready?
+    - 
 3. How can this application scale with a growing dataset?
+    - 
 4. How can PII be recovered later on?
+    - 
 5. What are the assumptions you made?
+    - 
