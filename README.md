@@ -11,18 +11,6 @@ author: Luke Davidson - davidson.luked@gmail.com - (978) 201-2693
 5. Run the main python file using the command `python3 main.py`
     * Enter the number of messages to request, transform and push to the Postgres DB when prompted
 
-# Design considerations
-1. How will you read messages from the queue?
-    - Test
-2. What type of data structures should be used?
-    - Test
-3. How will you mask the PII data so that duplicate values can be identified?
-    - Test
-4. What will be your strategy for connecting and writing to Postgres?
-    - Test
-5. Where and how will your application run?
-    - Test
-
 # Questions
 1. How would you deploy this application in production?
     - Test
