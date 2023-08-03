@@ -29,9 +29,11 @@ def write_to_db(info):
     Inputs:
         info (list): list of transformed data from SQS message
     """
-    db_connection = psycopg2.connect(host="localhost", database="postgres", user="postgres", password="postgres")
+    db_connection = psycopg2.connect(host="localhost", port=5432, database="postgres", user="postgres", password="postgres")
     cursor = db_connection.cursor()
-    cursor.execute("""INSERT INTO user_logins (user_id, device_type, masked_ip, masked_device_id, locale, app_version, create_date) VALUES (%s, %s, %s, %s, %s, %s, %s)""", info)
+    cursor.execute()
+    cursor.execute("INSERT INTO user_logins (user_id, device_type, masked_ip, masked_device_id, locale, app_version, create_date) VALUES (%s, %s, %s, %s, %s, %s, %s)", info)
+    
     db_connection.commit()
     cursor.close()
     db_connection.close()
@@ -40,7 +42,6 @@ def write_to_db(info):
 if __name__ == "__main__":
     num_msgs = int(input(f"Enter the number of messages to add to the database: "))
     response = sqs.receive_message(QueueUrl=QUEUE_URL, MaxNumberOfMessages=num_msgs)
-    print(response)
     if list(response.keys())[0] == "Messages":
         for m in response['Messages']:
             js = json.loads(m['Body'])
