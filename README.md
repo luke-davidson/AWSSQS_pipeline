@@ -13,24 +13,24 @@ author: Luke Davidson - davidson.luked@gmail.com - (978) 201-2693
 
 # Design considerations
 1. How will you read messages from the queue?
-    - 
+    - Test
 2. What type of data structures should be used?
-    - 
+    - Test
 3. How will you mask the PII data so that duplicate values can be identified?
-    - 
+    - Test
 4. What will be your strategy for connecting and writing to Postgres?
-    - 
+    - Test
 5. Where and how will your application run?
-    - 
+    - Test
 
 # Questions
 1. How would you deploy this application in production?
-    - 
+    - Test
 2. What other components would you want to add to make this production ready?
-    - 
+    - Test
 3. How can this application scale with a growing dataset?
-    - 
+    - Test
 4. How can PII be recovered later on?
-    - 
+    - Test
 5. What are the assumptions you made?
-    - 
+    - Test
